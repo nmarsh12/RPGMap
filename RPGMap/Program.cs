@@ -33,6 +33,7 @@ namespace RPGMap
             };
             MapRenderer mapper = new MapRenderer(null); 
             mapper.DisplayMap();
+            mapper.DisplayMap(4);
         }
 
         
@@ -72,17 +73,23 @@ namespace RPGMap
         public List<string> DisplayMap(int scale)
         {
             List<string> border = new List<string>();
-            int arrayHorizontalSize = mapArray[0].Length;
-            int arrayVerticalSize = mapArray.Length;
+            int arrayHorizontalSize = mapArray[0].Length * scale;
+            int arrayVerticalSize = mapArray.Length * scale;
 
+            // Creates border, has a bunch of junk characters in the middle but map is written over it
             for (int i = 0; i < arrayVerticalSize + 2; i++){
                 for (int j = 0; j < arrayHorizontalSize + 2; j++){
                     if (i == 0 || i == arrayVerticalSize + 1) {
+                        if (j == 0 || j = arrayHorizontalSize + 1) {
+                            border[i] += "+";
+                        }
                         border[i] += "-";
                     }
                     else border[i] += "|";
                 }
             }
+
+            
 
             Console.WriteLine(border);
             return border;
