@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,23 @@ namespace RPGMap
 
         static void Main(string[] args)
         {
+            string[] testMap =
+            {
+                "^^^'''''''''''''''''''''''''''",
+                "^^''''**''''''''''''''''~~~'''",
+                "^^'''**'''''''''''''''~~~'''''",
+                "^'''''''''''''''''''''''''''''",
+                "''''~~~'''''''''''''''''''''''",
+                "''''~~~'''''''''''''''''''''''",
+                "'''~~~~'''''''''''''''^^''''''",
+                "'''''~~~'''''''''''''^^^^'''''",
+                "'''''~~~~''''''''''''''^^^^'''",
+                "'''''''~''''''''''''''''''''''",
+                "''''''''''''''''''''''''''''''",
+                "''''''''''''''''''''''''''''''"
+            };
+            MapRenderer mapper = new MapRenderer(null); 
+            mapper.DisplayMap();
         }
 
         
@@ -47,10 +64,28 @@ namespace RPGMap
             else this.mapArray = _MapStringArray;
         }
 
-        void DisplayMap(int scale=1)
+        public List<string> DisplayMap() 
         {
+            return DisplayMap(1);
+        }
+
+        public List<string> DisplayMap(int scale)
+        {
+            List<string> border = new List<string>();
             int arrayHorizontalSize = mapArray[0].Length;
             int arrayVerticalSize = mapArray.Length;
+
+            for (int i = 0; i < arrayVerticalSize + 2; i++){
+                for (int j = 0; j < arrayHorizontalSize + 2; j++){
+                    if (i == 0 || i == arrayVerticalSize + 1) {
+                        border[i] += "-";
+                    }
+                    else border[i] += "|";
+                }
+            }
+
+            Console.WriteLine(border);
+            return border;
         }
     }
 }
